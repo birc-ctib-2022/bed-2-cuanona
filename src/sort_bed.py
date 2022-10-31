@@ -20,8 +20,7 @@ def sort_file(table: Table) -> None:
 
 def sort_chr(bed_lines: List[BedLine]) -> List[BedLine]:
     """Sort a chromosome using buil in sort function"""
-
-    bed_lines.sort(key=attrgetter('chrom_start', 'chrom_end'))
+    bed_lines.sort(key=attrgetter('chrom_start', 'chrom_end', 'name'))
     return bed_lines
 
 def print_file(table: Table, outfile: TextIO) -> None:
