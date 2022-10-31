@@ -28,10 +28,27 @@ def read_bed_file(f: TextIO) -> list[BedLine]:
 
     return res
 
+def is_BedLine_before(elem1: BedLine, elem2: BedLine):
+    for key in ['chrom', 'chrom_start', 'chrom_end']:
+        if getattr(elem1,key) > getattr(elem2,key):
+            return False
+    return True
+
+def merge_sort_generator(f1: list[BedLine], f2: list[BedLine]) -> BedLine:
+    iter1, iter2 = iter(f1), iter(f2)
+    for (elem1, elem2) in zip(iter1, iter2):
+        if is_BedLine_before(elem1, elem2):
+            yield elem1
+        yield elem2
+    for elem1 in iter1:
+        yield elem1
+    for elem2 in iter2:
+        yield elem2
+
 
 def merge(f1: list[BedLine], f2: list[BedLine], outfile: TextIO) -> None:
-    """Merge features and write them to outfile."""
-    # FIXME: I have work to do here!
+    while elem:= merge_sort_generator(f1, f2):
+        print_line(elem, outfile)
 
 
 def main() -> None:
