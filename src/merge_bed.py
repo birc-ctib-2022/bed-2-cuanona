@@ -47,7 +47,7 @@ def merge_sort_generator(f1: list[BedLine], f2: list[BedLine]) -> BedLine:
 
 
 def merge(f1: list[BedLine], f2: list[BedLine], outfile: TextIO) -> None:
-    while elem:= merge_sort_generator(f1, f2):
+    for elem in merge_sort_generator(f1, f2):
         print_line(elem, outfile)
 
 
