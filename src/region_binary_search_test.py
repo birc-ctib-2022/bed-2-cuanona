@@ -3,6 +3,17 @@ import random
 from region_binary_search import binary_search_region_start, extract_region, is_feature_in
 from sort_bed import sort_chr
 
+def test_non_unique_start():
+    x = [
+        BedLine("chrom3",	774,	775,	"Feature-148"),
+        BedLine("chrom3",	778,	779,	"Feature-125"),
+        BedLine("chrom3",	780,	781,	"Feature-401"),
+        BedLine("chrom3",	796,	797,	"Feature-515"),
+        BedLine("chrom3",	796,	797,	"Feature-646"),
+        BedLine("chrom3",	809,	810,	"Feature-335")
+        ]
+    assert binary_search_region_start(x, start = 796) == 3
+
 def test_empty_list()-> None:
     x = []
     assert binary_search_region_start(x, start = 5) == 0
