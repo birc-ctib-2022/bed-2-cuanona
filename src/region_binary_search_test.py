@@ -1,5 +1,7 @@
 from bed import BedLine
-from region_binary_search import binary_search_region_start
+import random
+from region_binary_search import binary_search_region_start, extract_region, is_feature_in
+from sort_bed import sort_chr
 
 def test_empty_list()-> None:
     x = []
