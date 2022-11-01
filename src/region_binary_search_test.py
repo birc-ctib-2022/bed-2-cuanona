@@ -1,7 +1,9 @@
 from bed import BedLine
 from region_binary_search import binary_search_region_start
 
-
+def test_empty_list()-> None:
+    x = []
+    assert binary_search_region_start(x, start = 5) == 0
 def test_lower_bound_exact() -> None:
     x = [
         BedLine("chr1", 0, 3, "foo"),
