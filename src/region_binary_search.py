@@ -33,21 +33,12 @@ def binary_search_region_start(bed_lines: list[BedLine], start: int):
     Find first index in a BedLine list for which the chromosome
     start is equal or greater than a given number."""
     low, high = 0, len(bed_lines)
-    if not bed_lines:
-        return 0
-    while True:
+    while low < high:
         mid = (high + low) // 2
-        y = bed_lines[mid].chrom_start
-        if y == start:
-            while bed_lines[mid-1].chrom_start == start:
-                mid -= 1
-            return mid
-        if high - low == 1:
-            if y > start:
-                return mid
-            if y < start:
-                return mid + 1
-        if  y > start:
+        if (bed_lines[low].chrom_start == start) or (low == high):
+            break
+        if bed_lines[mid].chrom_start < start:
+            low = mid +1
+        else:
             high = mid
-        if  y < start:
-            low = mid
+    return low
