@@ -34,10 +34,10 @@ def parse_line(line: str) -> BedLine:
     return bed_line
 
 
-def print_line(line: BedLine, f: TextIO) -> None:
+def print_line(line: BedLine, file: TextIO) -> None:
     """Prints line to the stream f as a BED line."""
     print(line.chrom, line.chrom_start,
-          line.chrom_end, line.name, file=f, sep='\t')
+          line.chrom_end, line.name, file=file, sep='\t')
 
 
 class Table:
@@ -66,9 +66,9 @@ class Table:
         self.tbl[chrom] = features
 
 
-def read_bed_file(f: TextIO) -> Table:
+def read_bed_file(file: TextIO) -> Table:
     """Read a BED file into a query.Table and return it."""
     table = Table()
-    for line in f:
+    for line in file:
         table.add_line(parse_line(line))
     return table

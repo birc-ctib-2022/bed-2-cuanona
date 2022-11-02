@@ -38,5 +38,5 @@ def test_diff_length_merge():
         BedLine("chr1", 1, 2, "foo"),  BedLine("chr1", 5, 10, "foo"),
         BedLine("chr2", 1, 2, "foo"), BedLine("chr3", 1, 2, "foo"),
          BedLine("chr4", 1, 2, "foo")]
-    observed = [elem for elem in merge_sort_generator(x, y)]
+    observed = list(merge_sort_generator(x, y))
     assert expected == observed

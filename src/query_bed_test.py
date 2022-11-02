@@ -39,7 +39,7 @@ def test_empty_query():
 
 def test_query_wrong():
     x = [ BedLine("chr1", 2, 3, "foo"),  BedLine("chr1", 4, 5, "foo")]
-    assert extract_region(x, 2, 2) == []
+    assert not extract_region(x, 2, 2)
 
 def test_one_feature():
     x = [ BedLine("chr1", 2, 3, "foo"),  BedLine("chr1", 4, 5, "foo")]
