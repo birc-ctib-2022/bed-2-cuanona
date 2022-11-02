@@ -12,23 +12,34 @@ def extract_region(features: list[BedLine],
         filtered.append(feat)
     return filtered
 
-def is_overlapping(x: tuple[int,int], y: tuple[int,int]) -> bool:
+def is_overlapping(interval_1: tuple[int,int], interval_2: tuple[int,int]) -> bool:
+    """Check if two intervals are overlapping
+    >>> is_overlapping((1, 10), (2, 5))
+    True
+    """
     # Credits to Thomas Maillund :)
-    return max(x[0], y[0]) < min(x[1], y[1])
+    return max(interval_1[0], interval_2[0]) < min(interval_1[1], interval_2[1])
 
 def is_feature_in(feat: BedLine, start: int, end: int):
+    """Check if a bedline is in a given interval
+    >>> is_feature_in(BedLine("chr1", 0, 3, "foo"), 0, 10)
+    True
+    """
     interval = (feat.chrom_start, feat.chrom_end)
     return is_overlapping(interval, (start, end))
 
-def binary_search_region_start(x: list[BedLine], start: int, low = None, high = None):
-    low, high = 0, len(x)
-    if not x:
+def binary_search_region_start(bed_lines: list[BedLine], start: int):
+    """
+    Find first index in a BedLine list for which the chromosome
+    start is equal or greater than a given number."""
+    low, high = 0, len(bed_lines)
+    if not bed_lines:
         return 0
     while True:
         mid = (high + low) // 2
-        y = x[mid].chrom_start
+        y = bed_lines[mid].chrom_start
         if y == start:
-            while x[mid-1].chrom_start == start:
+            while bed_lines[mid-1].chrom_start == start:
                 mid -= 1
             return mid
         if high - low == 1:
@@ -37,6 +48,6 @@ def binary_search_region_start(x: list[BedLine], start: int, low = None, high = 
             if y < start:
                 return mid + 1
         if  y > start:
-            low, high = low, mid
+            high = mid
         if  y < start:
-            low, high = mid, high
+            low = mid
