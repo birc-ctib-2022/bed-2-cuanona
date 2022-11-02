@@ -3,28 +3,28 @@
 # names that start with test_
 
 from bed import BedLine
-from merge_bed import is_BedLine_before, merge_sort_generator
+from merge_bed import is_bedline_before, merge_sort_generator
 
 
 def test_different_chr() -> None:
     """Test is BedLine_before with different chromosomes"""
     x = BedLine("chr1", 1, 2, "foo")
     y = BedLine("chr0", 10, 20, "foo")
-    assert not is_BedLine_before(x, y)
+    assert not is_bedline_before(x, y)
 
 
 def test_different_start() -> None:
     """Test is BedLine_before with different start"""
     x = BedLine("chr1", 1, 2, "foo")
     y = BedLine("chr1", 10, 20, "foo")
-    assert is_BedLine_before(x, y)
+    assert is_bedline_before(x, y)
 
 
 def test_different_end() -> None:
     """Test is BedLine_before with different end"""
     x = BedLine("chr1", 10, 20, "foo")
     y = BedLine("chr0", 10, 12, "foo")
-    assert not is_BedLine_before(x, y)
+    assert not is_bedline_before(x, y)
 
 
 def test_simple_merge() -> None:
