@@ -4,7 +4,7 @@ import argparse  # we use this module for option parsing. See main for details.
 
 import sys
 from bed import (
-    read_bed_file, print_line, BedLine
+    read_bed_file, print_line
 )
 from region_binary_search import extract_region
 

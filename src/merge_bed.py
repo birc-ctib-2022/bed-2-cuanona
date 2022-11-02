@@ -9,15 +9,15 @@ from bed import (
 )
 
 
-def read_bed_file(f: TextIO) -> list[BedLine]:
+def read_bed_file(file: TextIO) -> list[BedLine]:
     """Read an entire sorted bed file."""
     # Handle first line...
-    line = f.readline()
+    line = file.readline()
     if not line:
         return []
 
     res = [parse_line(line)]
-    for line in f:
+    for line in file:
         feature = parse_line(line)
         prev_feature = res[-1]
         assert prev_feature.chrom < feature.chrom or \
@@ -28,16 +28,21 @@ def read_bed_file(f: TextIO) -> list[BedLine]:
 
     return res
 
-def is_BedLine_before(elem1: BedLine, elem2: BedLine):
+def is_bedline_before(elem1: BedLine, elem2: BedLine) -> bool:
+    """Check if a BedLine tuple is before another
+    >>> is_bedline_before(BedLine("chr1", 1, 2, "foo"),BedLine("chr1", 5, 6, "foo"))
+    True
+    """
     for key in ['chrom', 'chrom_start', 'chrom_end']:
         if getattr(elem1,key) > getattr(elem2,key):
             return False
     return True
 
-def merge_sort_generator(f1: list[BedLine], f2: list[BedLine]) -> BedLine:
-    iter1, iter2 = iter(f1), iter(f2)
+def merge_sort_generator(list_1: list[BedLine], list_2: list[BedLine]) -> list[BedLine]:
+    """It merges two sorted list and yields elements."""
+    iter1, iter2 = iter(list_1), iter(list_2)
     for (elem1, elem2) in zip(iter1, iter2):
-        if is_BedLine_before(elem1, elem2):
+        if is_bedline_before(elem1, elem2):
             yield elem1
         yield elem2
     for elem1 in iter1:
@@ -46,8 +51,9 @@ def merge_sort_generator(f1: list[BedLine], f2: list[BedLine]) -> BedLine:
         yield elem2
 
 
-def merge(f1: list[BedLine], f2: list[BedLine], outfile: TextIO) -> None:
-    for elem in merge_sort_generator(f1, f2):
+def merge(list_1: list[BedLine], list_2: list[BedLine], outfile: TextIO) -> None:
+    """Merge 2 BedLine list and write the result into an output file."""
+    for elem in merge_sort_generator(list_1, list_2):
         print_line(elem, outfile)
 
 
