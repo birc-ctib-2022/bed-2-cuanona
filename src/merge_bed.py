@@ -30,7 +30,7 @@ def read_bed_file(file: TextIO) -> list[BedLine]:
 
 def is_bedline_before(elem1: BedLine, elem2: BedLine) -> bool:
     """Check if a BedLine tuple is before another
-    >>> is_BedLine_before(BedLine("chr1", 1, 2, "foo"),BedLine("chr1", 5, 6, "foo"))
+    >>> is_bedline_before(BedLine("chr1", 1, 2, "foo"),BedLine("chr1", 5, 6, "foo"))
     True
     """
     for key in ['chrom', 'chrom_start', 'chrom_end']:
