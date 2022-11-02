@@ -22,25 +22,25 @@ def test_extract_region() -> None:
         assert expected == extract_region(features, start, end)
 
 def test_happy_path():
-    x = [ BedLine("chr1", 2, 3, "foo"),  BedLine("chr1", 4, 5, "foo")]
-    assert extract_region(x, 1, 10) == x
-    assert extract_region(x, 2, 5) == x
-    x = [BedLine("chr1", 2, 3, "foo"), BedLine("chr1", 4, 5, "foo")]
-    assert extract_region(x, 2, 5) == x
-    assert extract_region(x, 1, 10) == x    
+    bed_lines = [ BedLine("chr1", 2, 3, "foo"),  BedLine("chr1", 4, 5, "foo")]
+    assert extract_region(bed_lines, 1, 10) == bed_lines
+    assert extract_region(bed_lines, 2, 5) == bed_lines
+    bed_lines = [BedLine("chr1", 2, 3, "foo"), BedLine("chr1", 4, 5, "foo")]
+    assert extract_region(bed_lines, 2, 5) == bed_lines
+    assert extract_region(bed_lines, 1, 10) == bed_lines    
 
 def test_empty_chr():
-    x = []
-    assert extract_region(x, 1, 10) == x
+    bed_lines = []
+    assert extract_region(bed_lines, 1, 10) == bed_lines
 
 def test_empty_query():
-    x = [ BedLine("chr1", 2, 3, "foo"),  BedLine("chr1", 4, 5, "foo")]
-    assert extract_region(x, 20, 100) == []
+    bed_lines = [ BedLine("chr1", 2, 3, "foo"),  BedLine("chr1", 4, 5, "foo")]
+    assert not extract_region(bed_lines, 20, 100)
 
 def test_query_wrong():
-    x = [ BedLine("chr1", 2, 3, "foo"),  BedLine("chr1", 4, 5, "foo")]
-    assert not extract_region(x, 2, 2)
+    bed_lines = [ BedLine("chr1", 2, 3, "foo"),  BedLine("chr1", 4, 5, "foo")]
+    assert not extract_region(bed_lines, 2, 2)
 
 def test_one_feature():
-    x = [ BedLine("chr1", 2, 3, "foo"),  BedLine("chr1", 4, 5, "foo")]
-    assert extract_region(x, 2, 4) == [ BedLine("chr1", 2, 3, "foo") ]
+    bed_lines = [ BedLine("chr1", 2, 3, "foo"),  BedLine("chr1", 4, 5, "foo")]
+    assert extract_region(bed_lines, 2, 4) == [ BedLine("chr1", 2, 3, "foo") ]
