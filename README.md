@@ -60,7 +60,27 @@ Once you have implemented a lower bound search for the start of the range, imple
 
 *How do you use binary search to find the lower bound of a number? How did you have to modify the binary search algorithm?*
 
+We define a range with a lower bound (low = 0) and an upper bound (high = len(x)). We search for the middle index by operating mid = (high + low) // 2, if the searched value is less than the value of the middle index, the lower limit is now defined as mid + 1. Otherwise, the upper limit will be decreased to the value of the middle index (mid). This loop will continue until the upper limit and the lower limit are equal low = high. 
+
+In a normal binary search, we would have exited the loop when mid = searched value. However, in our case, in order not to lose values, we exit the loop when low = high.
+
 *Would anything be more difficult if the features covered ranges instead of single nucleotides (like real BED files)? What could go wrong, if anything?*
+
+Yes, there would be problems with those features starting before the start of the query. Our binary search would not find that start. Since it may be the case that the first feature occupies the whole range, I can't think of any way to avoid iterating through the whole list (although there must be a way to avoid iterating through the whole list).
+
+![Figure 2](docs/fig2.svg)
+
 
 *We wrote a tool for merging two BED files, but what if we had a bunch of them? What would the complexity be if we merged them in, one at a time? What would the complexity be if we merged all of the files at the same time?*
 
+Merging two files, of size $n$ and $m$ takes $O(m + n)$. Then, merging them one by one would have the following complexity:
+
+$$
+O(n_1 + n_2 + (n_1 + n_2) + n_3 + (n_1 + n_2 + n_3) + n_4 + ...) = O( k\times n_1 + \sum _{i =2}^k k \times n_i )
+$$
+
+To merge all files at the same time, we need to concatenate all files and then sort them. So, we will get a complexity:
+
+$$
+O(\sum n_i \times log(\sum n_i))
+$$

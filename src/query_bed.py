@@ -4,15 +4,9 @@ import argparse  # we use this module for option parsing. See main for details.
 
 import sys
 from bed import (
-    read_bed_file, print_line, BedLine
+    read_bed_file, print_line
 )
-
-
-def extract_region(features: list[BedLine],
-                   start: int, end: int) -> list[BedLine]:
-    """Extract region chrom[start:end] and write it to outfile."""
-    return []  # FIXME: We want the actual region, not an empty list!
-
+from region_binary_search import extract_region
 
 def main() -> None:
     """Run the program."""

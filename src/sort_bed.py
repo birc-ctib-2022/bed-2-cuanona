@@ -1,11 +1,12 @@
 """Tool for cleaning up a BED file."""
 
-import argparse  # we use this module for option parsing. See main for details.
+import argparse
+from operator import attrgetter  # we use this module for option parsing. See main for details.
 
 import sys
-from typing import TextIO
+from typing import List, TextIO
 from bed import (
-    read_bed_file, print_line, Table
+    BedLine, read_bed_file, print_line, Table
 )
 
 
@@ -15,9 +16,12 @@ def sort_file(table: Table) -> None:
         # Here we iterate through all the chromosomes in the file.
         # You need to sort `features` with respect to chrom_start
         # and then updatte the table
-        # FIXME: sort `features`
-        table[chrom] = features  # features should be sorted here
+        table[chrom] = sort_chr(features)  # features should be sorted here
 
+def sort_chr(bed_lines: List[BedLine]) -> List[BedLine]:
+    """Sort a chromosome using buil in sort function"""
+    bed_lines.sort(key=attrgetter('chrom_start', 'chrom_end', 'name'))
+    return bed_lines
 
 def print_file(table: Table, outfile: TextIO) -> None:
     """Write the content of table to outfile."""
