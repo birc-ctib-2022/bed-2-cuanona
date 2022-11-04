@@ -82,5 +82,5 @@ $$
 To merge all files at the same time, we need to concatenate all files and then sort them. So, we will get a complexity:
 
 $$
-O((\sum n_i)log(\sum n_i))
+O(\sum n_i \times log(\sum n_i))
 $$
