@@ -68,7 +68,7 @@ In a normal binary search, we would have exited the loop when mid = searched val
 
 Yes, there would be problems with those features starting before the start of the query. Our binary search would not find that start. Since it may be the case that the first feature occupies the whole range, I can't think of any way to avoid iterating through the whole list (although there must be a way to avoid iterating through the whole list).
 
-[Figure 2](docs\fig2.svg)
+[Figure 2](docs/fig2.svg)
 
 
 *We wrote a tool for merging two BED files, but what if we had a bunch of them? What would the complexity be if we merged them in, one at a time? What would the complexity be if we merged all of the files at the same time?*
