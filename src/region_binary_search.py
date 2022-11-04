@@ -33,8 +33,6 @@ def binary_search_region_start(bed_lines: list[BedLine], start: int):
     low, high = 0, len(bed_lines)
     while low < high:
         mid = (high + low) // 2
-        if (bed_lines[low].chrom_start == start) or (low == high):
-            break
         if bed_lines[mid].chrom_start < start:
             low = mid +1
         else:

@@ -18,7 +18,7 @@ def test_non_unique_start():
 
 def test_empty_list()-> None:
     """Test binary for empty list"""
-    bed_lines = list()
+    bed_lines: list[BedLine] = list()
     assert binary_search_region_start(bed_lines, start = 5) == 0
 
 def test_lower_bound_exact() -> None:
