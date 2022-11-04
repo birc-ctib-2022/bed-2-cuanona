@@ -62,5 +62,10 @@ Once you have implemented a lower bound search for the start of the range, imple
 
 *Would anything be more difficult if the features covered ranges instead of single nucleotides (like real BED files)? What could go wrong, if anything?*
 
+Yes, there would be problems with those features starting before the start of the query. Our binary search would not find that start. Since it may be the case that the first feature occupies the whole range, I can't think of any way to avoid iterating through the whole list (although there must be a way to avoid iterating through the whole list).
+
+[Figure 2](docs\fig2.svg)
+
+
 *We wrote a tool for merging two BED files, but what if we had a bunch of them? What would the complexity be if we merged them in, one at a time? What would the complexity be if we merged all of the files at the same time?*
 
