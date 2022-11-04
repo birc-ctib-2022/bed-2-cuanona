@@ -79,15 +79,8 @@ $$
 O(n_1 + n_2 + (n_1 + n_2) + n_3 + (n_1 + n_2 + n_3) + n_4 + ...) =  k\times n_1 + \sum _{i =2}^k k \times n_i
 $$
 
-For merging a lot different Bedlines one at the time we would need:
+To merge all files at the same time, we need to concatenate all files and then sort them. So, we will get a complexity:
 
-$$
-O(k(n_{1}+n_{2})+(k-1)n_{3}+(k-2)n_{4}.....+2n_{k-1}+ n_{k}) 
-$$
-
-In case we want to merge all of the files at the same time we would have a O(n*l) been the n the list with the maximun lenght and l the number of Bedlines files we have to merge. This is cause in the worst case we will have to itinerate in all the files till the largest lenght.
-
-If we first concatenate the files and then sort them, we will get a complexity:
 $$
 O((\sum n_i)log(\sum n_i))
 $$
