@@ -76,7 +76,7 @@ Yes, there would be problems with those features starting before the start of th
 Merging two files, of size $n$ and $m$ takes $O(m + n)$. Then, merging them one by one would have the following complexity:
 
 $$
-O(n_1 + n_2 + (n_1 + n_2) + n_3 + (n_1 + n_2 + n_3) + n_4 + ...) =  k\times n_1 + \sum _{i =2}^k k \times n_i
+O(n_1 + n_2 + (n_1 + n_2) + n_3 + (n_1 + n_2 + n_3) + n_4 + ...) = O( k\times n_1 + \sum _{i =2}^k k \times n_i )
 $$
 
 To merge all files at the same time, we need to concatenate all files and then sort them. So, we will get a complexity:
