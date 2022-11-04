@@ -3,7 +3,7 @@
 import argparse  # we use this module for option parsing. See main for details.
 
 import sys
-from typing import TextIO
+from typing import TextIO, Generator
 from bed import (
     parse_line, print_line, BedLine
 )
@@ -38,7 +38,7 @@ def is_bedline_before(elem1: BedLine, elem2: BedLine) -> bool:
             return False
     return True
 
-def merge_sort_generator(list_1: list[BedLine], list_2: list[BedLine]) -> list[BedLine]:
+def merge_sort_generator(list_1: list[BedLine], list_2: list[BedLine]) -> Generator[BedLine, None, None]:
     """It merges two sorted list and yields elements."""
     iter1, iter2 = iter(list_1), iter(list_2)
     for (elem1, elem2) in zip(iter1, iter2):
